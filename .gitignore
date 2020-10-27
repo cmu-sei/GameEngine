@@ -1,0 +1,8 @@
+**/obj/
+**/bin/
+**/_data/
+.vs*
+appsettings.*.json
+src/GameEngine.Api/GameEngine.Api.csproj.user
+src/GameEngine.Api/stats.json
+NuGet.Config

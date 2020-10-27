@@ -1,0 +1,16 @@
+@api = http://dev.local/api
+@json = Content-Type: application/json
+###
+
+POST {{api}}/values
+{{json}}
+
+{
+    "Id": "p14",
+    "TeamId": "t1",
+    "ChallengeId": "8cd9d4ee59af6e1a4045ff1131d8dae35f368bb0",
+    "CallbackUrl": "callback.url"
+}
+
+###
+GET {{api}}/game/game-solo-1908

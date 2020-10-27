@@ -1,0 +1,53 @@
+@api = http://localhost:5001/api
+@key = X-API-KEY: dev#12345
+@json = Content-Type: application/json
+@prob = 4344e0d2213034abd8a12c4e58b04c34
+
+###
+GET {{api}}/game/playtest
+{{key}}
+
+###
+GET {{api}}/game/forecast
+{{key}}
+
+###
+POST {{api}}/game/reserve/1234
+{{key}}
+
+###
+POST {{api}}/problem
+{{key}}
+{{json}}
+
+{
+    "Id": "{{prob}}",
+    "ChallengeId": "e603da7c4bfcdf4f0f2949a5e14946bf472beb97",
+    "Team": {
+        "Id": "42345",
+        "Name": "jamOne",
+        "Players": [
+            { "Id": "1", "Name": "jane.doe" },
+            { "Id": "2", "Name": "john.doe" },
+            { "Id": "3", "Name": "jane.doe2" },
+            { "Id": "4", "Name": "john.doe2" }
+        ]
+    }
+}
+
+###
+PUT {{api}}/problem/
+{{key}}
+{{json}}
+
+{
+    "Id": "{{prob}}",
+    "Token": "WKST022,21,46.236.64.15,1762,hping2-v2-win32.zip"
+}
+
+###
+GET {{api}}/problem/j13
+
+###
+DELETE {{api}}/problem/8d9b5c55428941a29745db34b61f2ddc
+{{key}}
