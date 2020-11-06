@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <Version>1.1.6</Version>
     <ProjectGuid>{CA187D7E-25B7-47C2-9542-130C40569F58}</ProjectGuid>
     <Authors />
     <Company />
