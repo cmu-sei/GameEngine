@@ -4,11 +4,11 @@ GameEngine is a web API that serves games and challenges and also provides gradi
 
 ## Dependencies
 
-The GameEngine requires the .NET Core 2.2 framework.
+The GameEngine requires the .NET Core 3.1 framework.
 
 ## Getting Started
 
-1. Install .Net Core SDK 2.2
+1. Install .Net Core SDK 3.1
 2. Start the application using the following command: `dotnet run`
 3. Browse to `http://localhost:5001/`
 
@@ -24,12 +24,12 @@ All data used by the application is read from a collection of configuration file
 Many of the defalt paths where data is assumed to be can be found in the Options class located here: `\gameengine\src\GameEngine.Api\Options.cs`
 
 By default a `_data` folder should be created under the `\gameengine\src\GameEngine.Api\` directory. This folder will contain additional folders such as `games`, `problems`, `_iso`, and `challenges`.
-	
+
 ## Configuration Settings
 
 The API has a few configuration options that can be set in the `appsettings.json` file located in the root of the GameEngine.Api application: `\gameengine\src\GameEngine.Api\`
 
-ClientKeys is an array of overloaded api keys in the format `name#random;callbackurl`. For example:  `solo#f1229d4c9772eab8272012aff161ab73e43d;https://solo.yourappurl.us/api/engine/`.  
+ClientKeys is an array of overloaded api keys in the format `name#random;callbackurl`. For example:  `solo#f1229d4c9772eab8272012aff161ab73e43d;https://solo.yourappurl.us/api/engine/`.
 
 Engine represents the Models/Options.cs object.
 
@@ -48,5 +48,5 @@ TopoMojo is the Url and api-key for accessing it; you'd get both from the topomo
 By default, GameEngine API listens on port 5001. In case you want to change this, open the file `Properties/launchSettings.json` and find the line:
 
 `"applicationUrl": "http://localhost:5001",`
-    
+
 ...and change the port in this line.

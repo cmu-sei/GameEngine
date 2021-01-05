@@ -1,4 +1,4 @@
-// Copyright 2020 Carnegie Mellon University. All Rights Reserved.
+// Copyright 2021 Carnegie Mellon University. All Rights Reserved.
 // Released under a MIT (SEI)-style license. See LICENSE.md in the project root for license information.
 
 using System;
@@ -17,11 +17,10 @@ namespace GameEngine.Api.Extensions
 
             var match = Regex.Match(clean, options.FlagWrapper, RegexOptions.IgnoreCase);
             string result = match.Success
-                ? match.Groups.Last().Value
+                ? match.Groups.Values.Last().Value
                 : clean;
 
             return result;
         }
     }
 }
-

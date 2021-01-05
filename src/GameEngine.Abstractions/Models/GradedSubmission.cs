@@ -1,4 +1,4 @@
-// Copyright 2020 Carnegie Mellon University. All Rights Reserved.
+// Copyright 2021 Carnegie Mellon University. All Rights Reserved.
 // Released under a MIT (SEI)-style license. See LICENSE.md in the project root for license information.
 
 using GameEngine.Abstractions.Models;
@@ -19,9 +19,8 @@ namespace GameEngine.Models
 
     public enum SubmissionStatus
     {
-        Submitted = 0,                
+        Submitted = 0,
         Passed = 1,
-        Failed = 2        
+        Failed = 2
     }
 }
-

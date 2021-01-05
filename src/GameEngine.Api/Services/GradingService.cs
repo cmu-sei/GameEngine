@@ -1,4 +1,4 @@
-// Copyright 2020 Carnegie Mellon University. All Rights Reserved.
+// Copyright 2021 Carnegie Mellon University. All Rights Reserved.
 // Released under a MIT (SEI)-style license. See LICENSE.md in the project root for license information.
 
 using GameEngine.Abstractions;
@@ -96,13 +96,13 @@ namespace GameEngine.Services
 
                     var check = false;
 
-                    // if max submissions <= 0 then we accept 
+                    // if max submissions <= 0 then we accept
                     // unlimited submissions if unsuccessful
                     if (context.Problem.Settings.MaxSubmissions > 0)
                     {
                         if (context.Spec.IsMultiStage)
                         {
-                            // if multi stage we only consider the 
+                            // if multi stage we only consider the
                             // last graded token incorrect count
                             check = result.GradedTokens.Last().Status != TokenStatusType.Correct &&
                                 flag.Count >= context.Problem.Settings.MaxSubmissions;
@@ -179,4 +179,3 @@ namespace GameEngine.Services
         }
     }
 }
-

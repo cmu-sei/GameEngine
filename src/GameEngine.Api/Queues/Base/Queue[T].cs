@@ -1,4 +1,4 @@
-// Copyright 2020 Carnegie Mellon University. All Rights Reserved.
+// Copyright 2021 Carnegie Mellon University. All Rights Reserved.
 // Released under a MIT (SEI)-style license. See LICENSE.md in the project root for license information.
 
 using GameEngine.Abstractions;
@@ -6,9 +6,11 @@ using GameEngine.Exceptions;
 using GameEngine.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
@@ -41,7 +43,7 @@ namespace GameEngine.Queues
             WaitQueue = new ActionBlock<T>(
                 async t => await ReQueueItem(t)
             );
-            Logger = logger;            
+            Logger = logger;
         }
 
         protected Options Options { get; }
@@ -105,9 +107,15 @@ namespace GameEngine.Queues
         {
             Logger.LogDebug($"Sending payload for {t.Id}, to {endpoint}");
 
+            StringContent content = new StringContent(
+                JsonConvert.SerializeObject(payload),
+                Encoding.UTF8,
+                "application/json"
+            );
+
             var http = HttpClientFactory.CreateClient(t.Client);
-            await http.PostAsJsonAsync(endpoint, payload);
+
+            await http.PostAsync(endpoint, content);
         }
     }
 }
-

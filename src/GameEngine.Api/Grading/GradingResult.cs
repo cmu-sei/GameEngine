@@ -1,4 +1,4 @@
-// Copyright 2020 Carnegie Mellon University. All Rights Reserved.
+// Copyright 2021 Carnegie Mellon University. All Rights Reserved.
 // Released under a MIT (SEI)-style license. See LICENSE.md in the project root for license information.
 
 using GameEngine.Abstractions.Models;
@@ -12,20 +12,20 @@ namespace GameEngine.Api.Grading
     {
         ProblemContext ProblemContext { get; }
 
-        public GradingResult(ProblemContext context) 
+        public GradingResult(ProblemContext context)
         {
             ProblemContext = context;
         }
 
         public List<Token> GradedTokens { get; set; } = new List<Token>();
 
-        public bool Success 
-        { 
-            get 
-            { 
+        public bool Success
+        {
+            get
+            {
                 return GradedTokens
                     .Where(t => t.Status == TokenStatusType.Correct)
-                    .Sum(i => i.Percent) == 100; 
+                    .Sum(i => i.Percent) == 100;
             }
         }
 
@@ -50,4 +50,3 @@ namespace GameEngine.Api.Grading
         }
     }
 }
-
