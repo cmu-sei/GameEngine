@@ -436,19 +436,31 @@ namespace GameEngine.Services
             if (context.Flag.GenerateCommand.IsEmpty())
                 return;
 
-            var process = Process.Start(
-                new ProcessStartInfo
-                {
-                    FileName = Options.Command,
-                    Arguments = string.Format(
-                        Options.CommandArgs,
-                        context.ChallengeFolder,
-                        context.ProblemFolder,
-                        context.Flag.GenerateImage,
-                        context.Flag.GenerateCommand
-                    )
-                }
-            );
+            string[] cmds = context.Flag.GenerateCommand.Split(';');
+
+            bool isSed = cmds.Length == 1 && cmds[0].StartsWith("sed ");
+
+            var processInfo = isSed
+                ? new ProcessStartInfo
+                    {
+                        FileName = "/bin/sed",
+                        Arguments = context.Flag.GenerateCommand
+                            .Substring(4)
+                            .Replace("/dst", context.ProblemFolder)
+                    }
+                : new ProcessStartInfo
+                    {
+                        FileName = Options.Command,
+                        Arguments = string.Format(
+                            Options.CommandArgs,
+                            context.ChallengeFolder,
+                            context.ProblemFolder,
+                            context.Flag.GenerateImage,
+                            context.Flag.GenerateCommand
+                        )
+                    };
+
+            var process = Process.Start(processInfo);
 
             Logger.LogInformation(process.StartInfo.Arguments);
             process.WaitForExit(Options.MaxScriptSeconds * 1000);
@@ -511,4 +523,3 @@ namespace GameEngine.Services
         }
     }
 }
-
