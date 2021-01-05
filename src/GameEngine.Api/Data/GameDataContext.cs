@@ -3,6 +3,7 @@
 
 using GameEngine.Abstractions.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace GameEngine.Data
         public GameDataContext (
             IOptions<Options> options,
             ILogger<GameDataContext> logger,
-            IHostingEnvironment env
+            IHostEnvironment env
         ) {
             Options = options.Value;
             Logger = logger;
@@ -27,17 +28,23 @@ namespace GameEngine.Data
                 .WithNamingConvention(new CamelCaseNamingConvention())
                 .IgnoreUnmatchedProperties()
                 .Build();
+
+            Directory.CreateDirectory(Options.ProblemPath);
+            Directory.CreateDirectory(Options.ChallengePath);
+            Directory.CreateDirectory(Options.ArchiveChallengePath);
+            Directory.CreateDirectory(Options.GamePath);
+            Directory.CreateDirectory(Options.ArchiveGamePath);
         }
 
         ILogger Logger { get; }
         Options Options { get; }
-        IHostingEnvironment Env { get; }
+        IHostEnvironment Env { get; }
 
         private IDeserializer yd;
 
         public string RootPath { get { return Env.ContentRootPath; }}
         public Dictionary<string, string> ContextMap { get; } = new Dictionary<string, string>();
-        public Dictionary<string, ChallengeSpec> ChallengeSpecs { get; private set; } = new Dictionary<string, ChallengeSpec>();        
+        public Dictionary<string, ChallengeSpec> ChallengeSpecs { get; private set; } = new Dictionary<string, ChallengeSpec>();
         public IEnumerable<ChallengeSpec> Specs { get { return ChallengeSpecs.Values; } }
 
         /// <summary>
@@ -64,4 +71,3 @@ namespace GameEngine.Data
         }
     }
 }
-

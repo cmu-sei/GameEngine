@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Polly;
 using Polly.Extensions.Http;
 using System;
@@ -41,13 +42,13 @@ namespace GameEngine.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(options =>
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                     options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                     options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
-                }); ;
+                });
 
             services
                 .AddOptions()
@@ -73,7 +74,7 @@ namespace GameEngine.Api
             services.AddTopoMojoClient(() => Configuration.GetSection("TopoMojo").Get<TopoMojo.Client.Options>());
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -85,8 +86,7 @@ namespace GameEngine.Api
                 app.UseHsts();
             }
 
-            // TODO: enable https redirects for all production environments
-            // app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.Use(async (context, next) =>
             {
@@ -105,9 +105,12 @@ namespace GameEngine.Api
                 await next();
             });
 
-            app.UseStaticFiles();
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseEndpoints(ep =>
+            {
+                ep.MapDefaultControllerRoute();
+            });
         }
     }
 }
-

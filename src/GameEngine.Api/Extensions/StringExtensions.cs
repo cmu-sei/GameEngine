@@ -17,11 +17,10 @@ namespace GameEngine.Api.Extensions
 
             var match = Regex.Match(clean, options.FlagWrapper, RegexOptions.IgnoreCase);
             string result = match.Success
-                ? match.Groups.Last().Value
+                ? match.Groups.Values.Last().Value
                 : clean;
 
             return result;
         }
     }
 }
-

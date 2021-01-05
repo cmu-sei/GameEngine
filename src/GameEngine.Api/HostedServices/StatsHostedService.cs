@@ -19,7 +19,7 @@ namespace GameEngine.HostedServices
             ILogger<StatsHostedService> logger,
             StatsService statsService,
             StatsOptions statsOptions,
-            IHostingEnvironment env
+            IHostEnvironment env
         )
         {
             Logger = logger;
@@ -84,4 +84,3 @@ namespace GameEngine.HostedServices
         }
     }
 }
-
