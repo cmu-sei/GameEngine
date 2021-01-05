@@ -1,4 +1,4 @@
-// Copyright 2020 Carnegie Mellon University. All Rights Reserved.
+// Copyright 2021 Carnegie Mellon University. All Rights Reserved.
 // Released under a MIT (SEI)-style license. See LICENSE.md in the project root for license information.
 
 using GameEngine.Abstractions.Models;
@@ -27,8 +27,8 @@ namespace GameEngine.Api.Tests
             return new ProblemContext()
             {
                 Spec = new ChallengeSpec
-                {                     
-                    
+                {
+
                 },
                 Problem = new Problem
                 {
@@ -47,8 +47,7 @@ namespace GameEngine.Api.Tests
 
         public void Dispose()
         {
-            
+
         }
     }
 }
-

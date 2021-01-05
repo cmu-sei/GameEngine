@@ -1,4 +1,4 @@
-// Copyright 2020 Carnegie Mellon University. All Rights Reserved.
+// Copyright 2021 Carnegie Mellon University. All Rights Reserved.
 // Released under a MIT (SEI)-style license. See LICENSE.md in the project root for license information.
 
 using GameEngine.Abstractions.Models;
@@ -46,7 +46,7 @@ namespace GameEngine.Api.Grading
 
             var timestamp = DateTime.UtcNow;
 
-            var tokens = Unwrap 
+            var tokens = Unwrap
                 ? problemFlag.Tokens.Select(t => t.Unwrap(Options))
                 : problemFlag.Tokens;
 
@@ -57,7 +57,7 @@ namespace GameEngine.Api.Grading
                 var existing = GetExistingToken(token, index);
 
                 if (existing == null)
-                {                    
+                {
                     var spec = ProblemContext.Flag.Tokens[index];
 
                     if (spec == null)
@@ -113,4 +113,3 @@ namespace GameEngine.Api.Grading
         }
     }
 }
-
